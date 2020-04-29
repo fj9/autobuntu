@@ -1,6 +1,16 @@
- - name: Installing Google Chrome
-   shell: |
-        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb 
-        sudo dpkg -i google-chrome-stable_current_amd64.deb
-        exit 0
+ - name: Check if Google Chrome is installed
+   command: dpkg-query -W google-chrome-stable_current_amd64
+   register: google-chrome-stable_current_amd64_check_deb
+   failed_when: google-chrome-stable_current_amd64_check_deb.rc > 1
+   changed_when: google-chrome-stable_current_amd64_check_deb.rc == 1
 
+ - name: Download Google Chrome
+   get_url:
+           url="{{  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb }}"
+           dest="/Downloads/google-chrome-stable_current_amd64.deb"
+   when: google-chrome-stable_current_amd64_check_deb.rc == 1
+ 
+ - name: Install Google Chrome
+   apt: deb="/Downloads/google-chrome-stable_current_amd64.deb"
+   sudo: true
+   when: google-chrome-stable_current_amd64_check_deb.rc == 1
