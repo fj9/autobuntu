@@ -1,5 +1,14 @@
 - hosts: localhost
   become: true
   tasks:
-  - name: Install vim
-    apt: name=vim
+  - name: Update and Upgrade apt packages
+    become: true
+    apt:
+            upgrade: yes
+            update_cache: yes
+            cache_valid_time: 86400 #one day
+  - name: Install packages
+    apt: name={{item}}
+    with_items:
+            - vim
+            - curl
