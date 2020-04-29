@@ -17,14 +17,23 @@
     command: mv ~/.zshrc ~/.zshrcbkp
     when: zshrc_stat.stat.exists
 
+  - name: Download OhMyZsh
+    get_url:
+      url: https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+      dest: /tmp/oh-my-zsh/install.sh
+      force: yes
+      mode: 0755
+    register: download_oh_my_zsh
+
   - name: Install OhMyZsh
-    shell: wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -0 - | zsh
+    command: "./tmp/oh-my-zsh/install.sh"
+    when: download_oh_my_zsh|success
 
   - name: Clone new ~/.zshrc
     git:
       repo=https://github.com/fj9/autobuntu/roles/zsh.zshrc
       dest=~/.zshrc
-  
+
   - name: Check for aliases
     stat: "path=~/alises.zsh"
     register: aliases_stat
@@ -32,7 +41,7 @@
   - name: Back up aliases
     command: mv ~/aliases.zsh ~/.aliases_bkp.zsh
     when: aliases_stat.stat.exists
-  
+
   - name: Clone aliases
     git:
       repo=https://github.com/fj9/autobuntu/roles/zsh/aliases.zsh
