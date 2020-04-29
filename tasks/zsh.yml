@@ -1,20 +1,14 @@
   - name: Install ZSH
-    apt: 
+    apt:
        name: [zsh]
 
   - name: Backup existing ~/.zshrc
     shell: if [ -f ~/.zshrc ]; then mv ~/.zshrc{,.orig}; fi
 
-  - name: Install OhMyZsh 
-    git: 
-      repo=https://github.com/robbyrussell/oh-my-zsh
-      dest=~/.oh-my-zsh
-    when: installation|success
-    register: cloning
-    sudo: no
+  - name: Install OhMyZsh
+    shell: sh -C "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
   - name: Clone new ~/.zshrc
-    git: 
+    git:
       repo=https://github.com/fj9/autobuntu/.zshrc
       dest=~/.zshrc
- 
