@@ -1,5 +1,6 @@
  - name: Install ZSH
-   apt: [zsh]
+   apt: 
+      name: [zsh]
 
  - name: Backup existing ~/.zshrc
    shell: if [ -f ~/.zshrc ]; then mv ~/.zshrc{,.orig}; fi
