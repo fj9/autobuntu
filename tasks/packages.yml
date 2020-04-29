@@ -1,5 +1,6 @@
   - name: Install packages
-    apt: name=[vim, curl, terminator, zsh]
+    apt: 
+      name:[vim, curl, terminator, zsh]
 
   - name: Instal OhMyZsh via curl
     shell: sh -C "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
