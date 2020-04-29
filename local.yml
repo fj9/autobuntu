@@ -9,3 +9,4 @@
             cache_valid_time: 86400 #one day
 
   - include: tasks/packages.yml
+  - include: tasks/zsh.yml
