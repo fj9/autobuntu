@@ -1,15 +1,16 @@
-- hosts: localhost
+- name: Set up local workstation
+  hosts: local
   become: true
-  tasks:
-  - name: Update and Upgrade apt packages
-    become: true
-    apt:
-            upgrade: yes
-            update_cache: yes
-            cache_valid_time: 86400 #one day
+  roles:
+          - role: packages
+          - role: snap
+          - role: zsh
+          - role: chrome
+            #         - role: vim
+            #- role: terraform
 
-  - include: tasks/packages.yml
-  - include: tasks/zsh.yml
-  - include: tasks/chrome.yml
-  - include: tasks/snap.yml
-  - include: tasks/gnome.yml
+            # - include: tasks/packages.yml
+            #  - include: tasks/zsh.yml
+            #  - include: tasks/chrome.yml
+            #  - include: tasks/snap.yml
+            #  - include: tasks/gnome.yml
