@@ -10,3 +10,4 @@
 
   - include: tasks/packages.yml
   - include: tasks/zsh.yml
+  - include: tasks/gnome.yml

@@ -1,0 +1,4 @@
+ - name: Setting Teminator as default terminal
+   dconf: 
+     key: "/org/gnome/desktop/default-applications/terminal" 
+     value: "/usr/bin/terminator"
