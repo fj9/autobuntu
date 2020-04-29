@@ -7,10 +7,4 @@
             upgrade: yes
             update_cache: yes
             cache_valid_time: 86400 #one day
-  - name: Install packages
-    apt: name={{item}}
-    with_items:
-            - vim
-            - curl
-            - terminator
-            - zsh
+  - include: tasks/packages.yml
