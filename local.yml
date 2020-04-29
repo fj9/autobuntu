@@ -11,4 +11,5 @@
   - include: tasks/packages.yml
   - include: tasks/zsh.yml
   - include: tasks/chrome.yml
+  - include: tasks/snap.yml
   - include: tasks/gnome.yml
