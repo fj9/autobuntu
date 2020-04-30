@@ -1,7 +1,5 @@
   - name: Install snaps
     snap:
             name: 
-              - chromium
-              - spotify
               - slack
-              - postman
+              - zoom-client

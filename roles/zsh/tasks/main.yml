@@ -21,34 +21,37 @@
 
   - name: Install OhMyZsh
     #command: sh -c "$(curl -fsSl https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
-    git: 
-      repo: https://github.com/ohmyzsh/ohmyzsh 
-      dest: ~/.oh-my-zsh 
+    git:
+      repo: https://github.com/ohmyzsh/ohmyzsh
+      dest: /home/{{ username_on_host }}/.oh-my-zsh
       force: yes
 
-  - name: Clone new ~/.zshrc
+  - name: Clone new dotfiles to tmp
     git:
-            repo: https://github.com/fj9/autobuntu/roles/zsh/.zshrc
-            dest: ~/.zshrc
+            repo: https://github.com/fj9/autobuntu/
+            dest: /tmp/autobuntu/
+
+  - name: Copy .zshrc
+    command: cp /tmp/autobuntu/roles/zsh/.zshrc /home/{{ username_on_host }}/.zshrc
 
   - name: Check for aliases
-    stat: "path=~/alises.zsh"
+    stat: 
+     path: /home/{{ username_on_host }}/aliases.zsh"
     register: aliases_stat
 
   - name: Back up aliases
-    command: mv ~/aliases.zsh ~/.aliases_bkp.zsh
+    command: mv /home/{{ username_on_host }}/aliases.zsh /home/{{ username_on_host }}/.aliases_bkp.zsh
     when: aliases_stat.stat.exists
 
-  - name: Clone aliases
-    git:
-      repo=https://github.com/fj9/autobuntu/roles/zsh/aliases.zsh
-      dest=~/aliases.zsh
+  - name: Copy aliases
+    command: cp /tmp/autobuntu/roles/zsh/aliases.zsh /home/{{ username_on_host }}/.aliases.zsh
 
   - name: Get Zsh Path
     command: which zsh
     register: zsh_path
 
   - name: Set Zsh as default
+    become: yes
     user: name={{ username_on_host }} shell={{ zsh_path.stdout }}
 
   - name: Check which shell
