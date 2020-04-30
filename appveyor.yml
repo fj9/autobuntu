@@ -1,0 +1,12 @@
+version: '1.0.{build}-{branch}'
+image: ubuntu1804
+platform: x64
+
+
+install:
+        - sudo apt-get -yq install python-pip
+        - sudo pip install ansible
+        - ansible --version
+
+build_script:
+        - ansible-playbook -i "localhost," -c local playbook.yml
