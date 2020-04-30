@@ -1,3 +1,7 @@
   - name: Install snaps
     snap:
-            name: chromium
+            name: 
+              - chromium
+              - spotify
+              - slack
+              - postman

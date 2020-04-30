@@ -7,4 +7,4 @@
 
   - name: Install packages
     apt:
-            name: [vim, curl, terminator]
+            name: [vim, curl, terminator, vagrant, virtualbox]
