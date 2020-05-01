@@ -1,6 +1,3 @@
-# Path to your dotfiles.
-export DOTFILES=$HOME/.dotfiles
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -80,7 +77,7 @@ ZSH_CUSTOM=$DOTFILES
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew aws )
+plugins=(git aws )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -107,18 +104,17 @@ export LANG=en_US.UTF-8
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-. ~/.dotfiles/aliases.zsh
-. ~/.dotfiles/functions.zsh
+. ~/aliases.zsh
 
 # Z
-. `brew --prefix`/etc/profile.d/z.sh
+. ~/z.sh
 #export PATH="/usr/local/sbin:$PATH"
 
 # Git Prompt not sure about this
 #source $(brew --prefix)/opt/zsh-git-prompt/zshrc.sh
 
 # Auto Suggestions
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Syntax higlighting
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

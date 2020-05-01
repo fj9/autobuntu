@@ -12,5 +12,5 @@
             # TODO       - zsh
           - snap
             # TODO make this check for already installed before running - chrome
-          - gnome
+            # - TODO gnome
           - station
