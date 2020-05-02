@@ -1,0 +1,21 @@
+---
+  - name: Donwload station
+    get_url:
+           url: https://dl.getstation.com/download/linux_64?filetype=AppImage
+           dest: /home/{{ username_on_host }}/Downloads/Station.AppImage
+
+  - name: Create Applications Directory
+    file:
+            path: /home/{{ username_on_host }}/Applications
+            state: directory
+
+  - name: Copy to home
+    synchronize:
+           src: /home/{{ username_on_host }}/Downloads/Station.AppImage
+           dest: /home/{{ username_on_host }}/Applications/Station.AppImage
+
+  - name: Make Station Excutable
+    become: yes
+    file:
+            path: /home/{{ username_on_host }}/Applications/Station.AppImage
+            mode: a+x

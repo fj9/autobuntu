@@ -7,49 +7,49 @@
                - git
        state: present
 
-  - name: Check for oh-my-zsh installation
-    stat: "path=~/.oh-my-zsh"
-    register: oh_my_zsh_stat
-
-  - name: Check for .zshrc
-    stat: "path=~/.zshrc"
-    register: zshrc_stat
-
-  - name: Back up .zshrc
-    command: mv ~/.zshrc ~/.zshrcbkp
-    when: zshrc_stat.stat.exists
-
   - name: Install OhMyZsh
-    #command: sh -c "$(curl -fsSl https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
     git:
       repo: https://github.com/ohmyzsh/ohmyzsh
       dest: /home/{{ username_on_host }}/.oh-my-zsh
-      force: yes
+
+  - name: Install Z
+    get_url:
+      url: https://raw.githubusercontent.com/rupa/z/master/z.sh
+      dest: /home/{{ username_on_host }}/z.sh
+      mode: a+x
+
+  - name: Install Zsh Syntax Highlighting
+    git:
+      repo: https://github.com/zsh-users/zsh-syntax-highlighting.git 
+      dest: /home/{{ username_on_host }}/zsh-syntax-highlighting
+
+  - name: Install Zsh Auto Seggestion
+    git:
+      repo: https://github.com/zsh-users/zsh-autosuggestions
+      dest: /home/{{ username_on_host }}/zsh-autosuggestions
 
   - name: Clone new dotfiles to tmp
     git:
             repo: https://github.com/fj9/autobuntu/
-            dest: /tmp/autobuntu/
+            dest: /home/{{ username_on_host }}/Downloads/autobuntu
 
   - name: Copy .zshrc
-    command: cp /tmp/autobuntu/roles/zsh/.zshrc /home/{{ username_on_host }}/.zshrc
-
-  - name: Check for aliases
-    stat: 
-     path: /home/{{ username_on_host }}/aliases.zsh"
-    register: aliases_stat
-
-  - name: Back up aliases
-    command: mv /home/{{ username_on_host }}/aliases.zsh /home/{{ username_on_host }}/.aliases_bkp.zsh
-    when: aliases_stat.stat.exists
+    copy:
+      src: /home/{{ username_on_host }}/Downloads/autobuntu/roles/zsh/.zshrc
+      dest: /home/{{ username_on_host }}/.zshrc
+      backup: yes
 
   - name: Copy aliases
-    command: cp /tmp/autobuntu/roles/zsh/aliases.zsh /home/{{ username_on_host }}/.aliases.zsh
+    copy:
+      src: /home/{{ username_on_host }}/Downloads/autobuntu/roles/zsh/aliases.zsh
+      dest: /home/{{ username_on_host }}/aliases.zsh
+      backup: yes
 
   - name: Get Zsh Path
     command: which zsh
     register: zsh_path
 
+    # TODO: This does not work
   - name: Set Zsh as default
     become: yes
     user: name={{ username_on_host }} shell={{ zsh_path.stdout }}

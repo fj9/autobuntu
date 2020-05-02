@@ -1,11 +1,11 @@
   - name: Install snaps
     snap:
-            name: 
+            name:
               - zoom-client
               - discord
               - spotify
 
-  - name: Install classic snaps  
+  - name: Install classic snaps
     snap:
             name: slack
             classic: yes

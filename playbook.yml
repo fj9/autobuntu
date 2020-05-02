@@ -2,15 +2,15 @@
 
  - name: Setting up local laptop
    hosts: all
-   become: yes
 
    vars_files:
            - vars/vars.yml
 
    roles:
           - packages
-            # TODO       - zsh
           - snap
+          - station
+            #TODO: Fix zsh doesn't work fully
+          - zsh
             # TODO make this check for already installed before running - chrome
             # - TODO gnome
-          - station
