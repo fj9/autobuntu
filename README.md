@@ -52,7 +52,7 @@ Probably need to add more to here, will see what I need.
 ### Station
 
 Installs [Station](https://getstation.com) as an AppImage
-TODO: This needs an Icon and needs to be added to the dock and Applications Tray
+TODO: This needs an icon and needs to be added to the dock and Applications Tray
 
 ### ZSH
 Installs zsh, OhMyZsh, Z, Zsh Auto Suggestion and Zsh Syntax Highlighting
