@@ -10,6 +10,7 @@
           - packages
           - snap
           - station
+          - git
             #TODO: Fix zsh doesn't work fully
           - zsh
             # TODO make this check for already installed before running - chrome

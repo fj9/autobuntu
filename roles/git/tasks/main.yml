@@ -1,0 +1,5 @@
+- name: Credential helper
+  git_config:
+          name: credential.helper
+          scope: global
+          value: cache
