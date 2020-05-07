@@ -59,6 +59,9 @@ Installs zsh, OhMyZsh, Z, Zsh Auto Suggestion and Zsh Syntax Highlighting
 
 TODO:  This does not seem to work at setting the shell
 
+### Git
+Some minimal git config - particularly credential helper
+
 ### Chrome 
 Installs Chrome from a dep using apt
 TODO: Potentially this needs to check if Chrome is installed but I think this might be ok
